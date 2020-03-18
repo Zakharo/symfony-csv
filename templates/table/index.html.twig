@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Internal invoice id</th>
+                <th>Amount</th>
+                <th>Due on</th>
+                <th>Price</th>
+                <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.identifier }}</td>
+                    <td>{{ invoice.amount }}</td>
+                    <td>{{ invoice.date|date("Y-m-d") }}</td>
+                    <td>{{ invoice.price }}</td>
+                    <td>{{ invoice.createdAt|date("Y-m-d") }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+{% endblock %}
